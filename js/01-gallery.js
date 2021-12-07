@@ -28,9 +28,8 @@ function createGaleryMarkup() {
 }
 
 gallery.addEventListener('click',openModal)
+gallery.addEventListener('keydown', _.throttle(onPressArrowButtonChangeImage, 200))
 let currentIndex = 0
-gallery.addEventListener('keydown', _.throttle(onPressArrowButton, 200))
-
 
 function openModal(event) {
     event.preventDefault();
@@ -60,7 +59,7 @@ function closeModal(event) {
     
 }
 
-function onPressArrowButton(event) {
+function onPressArrowButtonChangeImage(event) {
 
     const modal = document.querySelector('.basicLightbox')
     const imageModal = modal.querySelector('img')
