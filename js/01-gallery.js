@@ -84,7 +84,7 @@ function onPressArrowButtonChangeImage(event) {
         }
         
     imageModal.src = galleryItems[currentIndex].original
-       console.log('Индекс картинки в Базе Данных :',currentIndex)
+       console.log(`Порядковый номер картинки в Базе Данных : ${currentIndex +1}`)
     }
 
    
