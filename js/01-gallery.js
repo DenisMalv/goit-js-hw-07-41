@@ -26,10 +26,11 @@ function createGaleryMarkup() {
 </div>`).join('')
     
 }
+let currentIndex = 0
 
 gallery.addEventListener('click',openModal)
 gallery.addEventListener('keydown', _.throttle(onPressArrowButtonChangeImage, 200))
-let currentIndex = 0
+
 
 function openModal(event) {
     event.preventDefault();
@@ -60,15 +61,14 @@ function closeModal(event) {
 }
 
 function onPressArrowButtonChangeImage(event) {
-
+    
     const modal = document.querySelector('.basicLightbox')
     const imageModal = modal.querySelector('img')
-        galleryItems.map((element, idx) => {
+    galleryItems.map((element, idx) => {
             if (element.original === imageModal.src) {
-                currentIndex = idx
+                currentIndex = idx                
             }
         })
-        console.log(currentIndex)
         if (event.code === LEFT_ARROWKEY) {
             currentIndex -= 1
             if (currentIndex < 0) {
@@ -84,7 +84,7 @@ function onPressArrowButtonChangeImage(event) {
         }
         
     imageModal.src = galleryItems[currentIndex].original
-       
+       console.log('Индекс картинки в Базе Данных :',currentIndex)
     }
 
    
