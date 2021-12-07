@@ -28,35 +28,65 @@ function createGaleryMarkup() {
 }
 
 gallery.addEventListener('click',openModal)
+let currentIndex = 0
+gallery.addEventListener('keydown', _.throttle(onPressArrowButton, 200))
 
 
 function openModal(event) {
     event.preventDefault();
 
     window.addEventListener('keydown', closeModal)
-    
-	const modalWindowMarkup = basicLightbox.create(`<img src="${event.target.dataset.source}">`, {
-        onShow: () => {
-                console.log('onShow', event)                      
-        },
-        onClose: (event) => {
+
+    const modalWindowMarkup = basicLightbox.create(`<img src="${event.target.dataset.source}">`, {
+        onShow:  ()=>console.log('onShow'),
+        onClose: () => {
             window.removeEventListener('keydown', closeModal)
-            console.log('onClose', event.visible())
+            console.log('onClose')
         }
     })
 
     showModal()
     closeModal(event)
 
-    function showModal() {
+function showModal() {
         modalWindowMarkup.show()
     }
-    function closeModal(event) {
+function closeModal(event) {
         if (event.code === ESC_KEY) {
             modalWindowMarkup.close()
         }
     }
+    
+    
 }
+
+function onPressArrowButton(event) {
+
+    const modal = document.querySelector('.basicLightbox')
+    const imageModal = modal.querySelector('img')
+        galleryItems.map((element, idx) => {
+            if (element.original === imageModal.src) {
+                currentIndex = idx
+            }
+        })
+        console.log(currentIndex)
+        if (event.code === LEFT_ARROWKEY) {
+            currentIndex -= 1
+            if (currentIndex < 0) {
+            currentIndex = galleryItems.length-1
+            }
+        }
+         
+        if (event.code === RIGHT_ARROWKEY) {
+            currentIndex += 1
+             if (currentIndex > galleryItems.length-1) {
+            currentIndex = 0
+        }
+        }
+        
+    imageModal.src = galleryItems[currentIndex].original
+       
+    }
 
    
 
