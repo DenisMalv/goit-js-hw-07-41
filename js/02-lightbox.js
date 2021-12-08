@@ -7,7 +7,10 @@ const gallery = document.querySelector('.gallery')
 gallery.insertAdjacentHTML('beforeend', createGaleryMarkup())
 
 const galleryLink = [...gallery.querySelectorAll('.gallery__item')]
-galleryLink.forEach(link => link.style.fontSize = 0)
+galleryLink.forEach(link => {
+    link.style.lineHeight = 0
+    link.style.display = 'block'
+})
 
 function createGaleryMarkup() {
     return galleryItems.map(({ preview, original, description }) =>
