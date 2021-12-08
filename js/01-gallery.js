@@ -8,8 +8,9 @@ const refs = {
     RIGHT_ARROWKEY:'ArrowRight',
     ESC_KEY :'Escape',
 }
-const {gallery,LEFT_ARROWKEY,RIGHT_ARROWKEY,ESC_KEY} = refs
+const {gallery,LEFT_ARROWKEY,RIGHT_ARROWKEY,ESC_KEY,} = refs
 console.log(gallery)
+
 
 gallery.insertAdjacentHTML('beforeend', createGaleryMarkup())
 
@@ -34,7 +35,9 @@ gallery.addEventListener('keydown', _.throttle(onPressArrowButtonChangeImage, 20
 
 function openModal(event) {
     event.preventDefault();
-
+    if (!event.target.classList.contains('gallery__image')) {
+            return
+        }  
     window.addEventListener('keydown', closeModal)
 
     const modalWindowMarkup = basicLightbox.create(`<img src="${event.target.dataset.source}">`, {
@@ -44,6 +47,7 @@ function openModal(event) {
             console.log('onClose')
         }
     })
+    
 
     showModal()
     closeModal(event)
@@ -87,7 +91,6 @@ function onPressArrowButtonChangeImage(event) {
        console.log(`Порядковый номер картинки в Базе Данных : ${currentIndex +1}`)
     }
 
-   
 
 
 
